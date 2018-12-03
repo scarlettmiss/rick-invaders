@@ -52,9 +52,7 @@ function create() {
     Gromflomites.physicsBodyType = Phaser.Physics.ARCADE;
 	//add gromflomites to the game
     createGromflomites();
-    //create lives text and sprites
     createLives();
-    //create score board
     createScore();
 	//movement
     cursors = game.input.keyboard.createCursorKeys();
@@ -64,12 +62,21 @@ function create() {
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    createbullets();
+    bullets.createMultiple(30, 'bullet');
+    bullets.setAll('anchor.x', 0.5);
+    bullets.setAll('anchor.y', 1);
+    bullets.setAll('outOfBoundsKill', true);
+    bullets.setAll('checkWorldBounds', true);
     //Gromflomites lasers
     Lasers = game.add.group();
     Lasers.enableBody = true;
     Lasers.physicsBodyType = Phaser.Physics.ARCADE;
-    createLasers();
+    Lasers.createMultiple(30, 'laser');
+    Lasers.setAll('anchor.x', 0.5);
+    Lasers.setAll('anchor.y', 1);
+    Lasers.setAll('outOfBoundsKill', true);
+    Lasers.setAll('checkWorldBounds', true);
+    
 }
 function createLives(){
     //add lives and life text
@@ -82,25 +89,7 @@ function createLives(){
         rick.alpha = 0.4;
     }
 }
-function createBullets(){
-    bullets.createMultiple(30, 'bullet');
-    bullets.setAll('anchor.x', 0.5);
-    bullets.setAll('anchor.y', 1);
-    bullets.setAll('outOfBoundsKill', true);
-    bullets.setAll('checkWorldBounds', true);
-    Lasers.createMultiple(30, 'laser');
-    Lasers.setAll('anchor.x', 0.5);
-    Lasers.setAll('anchor.y', 1);
-    Lasers.setAll('outOfBoundsKill', true);
-    Lasers.setAll('checkWorldBounds', true);
-}
-function createLasers(){
-    Lasers.createMultiple(30, 'laser');
-    Lasers.setAll('anchor.x', 0.5);
-    Lasers.setAll('anchor.y', 1);
-    Lasers.setAll('outOfBoundsKill', true);
-    Lasers.setAll('checkWorldBounds', true);
-}
+
 function createScore(){
     //show score on top
     scoreString = 'Score: ';
